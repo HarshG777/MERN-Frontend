@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools{
-        Nodejs 'sonarnode'
+        NodeJS 'sonarnode'
     }
 
     environment {
