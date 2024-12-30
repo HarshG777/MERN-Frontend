@@ -55,7 +55,7 @@ pipeline {
                 -Dsonar.projectKey=MERN-frontEnd 
                 -Dsonar.sources=. 
                 -Dsonar.host.url=http://localhost:9000
-                -Dsonar.login=%SONAR_TOKEN%
+                -Dsonar.login=sqp_947ea23dd1652e51c7b35a807678cc761a89ab00
                 '''
             }
         }
