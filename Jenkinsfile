@@ -1,9 +1,13 @@
 pipeline {
     agent any
 
+    tools{
+        Nodejs 'sonarnode'
+    }
+
     environment {
-        NODE_HOME = tool 'nodejs' // Replace with your configured Node.js tool name in Jenkins
-        PATH = "${NODE_HOME}/bin:${env.PATH}"
+        NODEJS_HOME = 'C:\\Program Files\\nodejs'  // Replace with your configured Node.js tool name in Jenkins
+        SONAR_SCANNER_PATH = 'C:\\Users\\lenovo\\Downloads\\sonar-scanner-cli-6.2.1.4610-windows-x64\\sonar-scanner-6.2.1.4610-windows-x64\\bin'
     }
 
     stages {
@@ -16,15 +20,26 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
+                set PATH=%NODEJS_HOME%;%PATH%
                 npm install
                 '''
             }
         }
 
-        stage('Run Tests') {
+        stage('Lint'){
+            steps{
+                bat '''
+                set PATH=%NODEJS_HOME%;%PATH%
+                npm run lint
+                '''
+            }
+        }
+
+        stage('Build') {
             steps {
                 bat '''
-                npm test
+                set PATH=%NODEJS_HOME%;%PATH%
+                npm run build
                 '''
             }
         }
@@ -35,6 +50,7 @@ pipeline {
             }
             steps {
                 bat '''
+                set PATH=%NODEJS_HOME%;%PATH%
                 sonar-scanner.bat 
                 -Dsonar.projectKey=MERN-frontEnd 
                 -Dsonar.sources=. 
