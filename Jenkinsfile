@@ -45,17 +45,17 @@ pipeline {
         }
 
         stage('SonarAnalysis') {
-            // environment {
-            //     // SONAR_TOKEN = credentials('sonarQub-token') // SonarQube token stored in Jenkins credentials
-            // }
+            environment {
+                SONAR_TOKEN = credentials('sonarQub-token') // SonarQube token stored in Jenkins credentials
+            }
             steps {
                 bat '''
-                set PATH=%NODEJS_HOME%;%PATH%
+                set PATH=%SONAR_SCANNER_PATH%;%PATH%
                 sonar-scanner.bat ^
                 -Dsonar.projectKey=MERN-frontEnd ^ 
                 -Dsonar.sources=. ^
                 -Dsonar.host.url=http://localhost:9000 ^
-                -Dsonar.token=sqp_947ea23dd1652e51c7b35a807678cc761a89ab00
+                -Dsonar.token=%SONAR_TOKEN%
                 '''
             }
         }
