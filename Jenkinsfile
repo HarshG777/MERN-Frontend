@@ -45,9 +45,9 @@ pipeline {
         }
 
         stage('SonarAnalysis') {
-            environment {
-                // SONAR_TOKEN = credentials('sonarQub-token') // SonarQube token stored in Jenkins credentials
-            }
+            // environment {
+            //     // SONAR_TOKEN = credentials('sonarQub-token') // SonarQube token stored in Jenkins credentials
+            // }
             steps {
                 bat '''
                 set PATH=%NODEJS_HOME%;%PATH%
