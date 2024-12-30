@@ -51,11 +51,7 @@ pipeline {
             steps {
                 bat '''
                 set PATH=%SONAR_SCANNER_PATH%;%PATH%
-                ${SONAR_SCANNER_PATH}\\sonar-scanner.bat ^
-                -Dsonar.projectKey=MERN-frontEnd ^
-                -Dsonar.sources=. ^
-                -Dsonar.host.url=http://localhost:9000 ^
-                -Dsonar.login=%SONAR_TOKEN%
+                sonar-scanner.bat -D"sonar.projectKey=MERN-frontEnd" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=%SONAR_TOKEN%
                 '''
             }
         }
